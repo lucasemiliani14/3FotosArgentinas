@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="300dp"
+    android:layout_height="200dp"
+    android:layout_gravity="center">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textSize="23dp"
+        android:text=""
+        android:id="@+id/frase_ganadora"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#2196F3"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textSize="20dp"
+        android:text="+50 pts."
+        android:id="@+id/puntos_ganados_dialog"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textSize="20dp"
+        android:text="+7 $"
+        android:id="@+id/plata_ganada_dialog"/>
+    <Button
+        android:layout_width="125dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="14dp"
+        android:background="@drawable/background_button_dialog_pasar_nivel"
+        android:textColor="#fff"
+        android:text="Siguiente"
+        android:id="@+id/boton_siguiente_dialog_pasar_nivel"/>
+</LinearLayout>

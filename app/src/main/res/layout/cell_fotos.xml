@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="250dp"
+    android:layout_height="250dp"
+    android:gravity="center"
+    android:background="@drawable/backround_for_images">
+    <ImageView
+        android:layout_width="256dp"
+        android:layout_height="236dp"
+        android:id="@+id/image_of_viewpager"
+        android:scaleType="centerCrop"/>
+</LinearLayout>
