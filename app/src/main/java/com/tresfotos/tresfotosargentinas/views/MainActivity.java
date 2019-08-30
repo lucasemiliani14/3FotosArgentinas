@@ -320,7 +320,6 @@ public class MainActivity extends AppCompatActivity {
             appDatabase.userDao().updatePlata(appDatabase.userDao().getUser().getPlata() - 14);
             textviewPlata.setText(appDatabase.userDao().getUser().getPlata().toString());
         }
-
     }
 
     // Si el usuario ya gano y no empezo el juego devuelta lo manda al GanasteActivity
