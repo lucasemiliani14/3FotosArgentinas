@@ -4,24 +4,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager.widget.ViewPager;
-
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.github.jinatonic.confetti.CommonConfetti;
 import com.tresfotos.tresfotosargentinas.model.pojo.Palabra;
 import com.tresfotos.tresfotosargentinas.R;
@@ -107,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
                     CommonConfetti.rainingConfetti(layout, new int[] { Color.BLUE }).oneShot();
                     popUpParaPasarAlSiguienteNivel();
                 } else {
-                    Toast.makeText(MainActivity.this, "Esta mal imbecil", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Segui participando", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -132,7 +130,8 @@ public class MainActivity extends AppCompatActivity {
             textView.setPadding(5, 5, 5, 5);
             textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
             textView.setTypeface(Typeface.DEFAULT_BOLD);
-            textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+//            textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            textView.setGravity(Gravity.CENTER);
             linearLayoutWord.addView(textView);
             textView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -162,9 +161,10 @@ public class MainActivity extends AppCompatActivity {
             textView.setText(String.valueOf(randomLetters.charAt(i)));
             textView.setBackground(getDrawable(R.drawable.textview_letters_with_corner));
             textView.setPadding(5, 5, 5, 5);
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 26);
             textView.setTypeface(Typeface.DEFAULT_BOLD);
-            textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            textView.setGravity(Gravity.CENTER);
+//            textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             textView.setId(i + 10);
             if (i < 6){ linearLayoutLettersFirstLine.addView(textView); } else { linearLayoutLettersSecondLine.addView(textView); }
             textView.setOnClickListener(new View.OnClickListener() {
@@ -277,7 +277,7 @@ public class MainActivity extends AppCompatActivity {
     //  Pone una latra random en el hint, este metodo se usa al usar la pista
     private void putRandomLetterOnHint(){
         String wordLetterForHint = "";
-        for (int i = 0; i < word.length(); i++) {
+        for (int i = 0; i < 50; i++) {
             int indexOfwordLetterForHint = new Random().nextInt(word.length());
             wordLetterForHint = String.valueOf(word.charAt(indexOfwordLetterForHint));
             TextView hintedTextview = findViewById(indexOfwordLetterForHint);
@@ -427,6 +427,16 @@ public class MainActivity extends AppCompatActivity {
         } else {
             pistas = "";
         }
+    }
+
+    //Te devuelve cuantas letras hay actualmente
+    public Integer getNumberOfCurrentWords(){
+        Integer totalLetters = 0;
+        for (int i = 0; i < word.length(); i++) {
+            TextView textView = findViewById(i);
+            totalLetters = totalLetters + 1;
+        }
+        return totalLetters;
     }
 
     // Llena la base de datos interna con todas las palabras. Esto deberia ser un Json en el futuro.
