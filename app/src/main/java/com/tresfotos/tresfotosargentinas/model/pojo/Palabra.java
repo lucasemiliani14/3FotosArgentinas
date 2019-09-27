@@ -22,9 +22,9 @@ public class Palabra {
 
     public Palabra(String nombrePalabra) {
         this.nombrePalabra = nombrePalabra;
-        drawableName1 = nombrePalabra + "1";
-        drawableName2 = nombrePalabra + "2";
-        drawableName3 = nombrePalabra + "3";
+        drawableName1 = getNombrePalabraSinTildes(nombrePalabra) + "1";
+        drawableName2 = getNombrePalabraSinTildes(nombrePalabra) + "2";
+        drawableName3 = getNombrePalabraSinTildes(nombrePalabra) + "3";
     }
 
     public String getNombrePalabra() {
@@ -89,5 +89,15 @@ public class Palabra {
 
     public void setPistasUtilizadas(String pistasUtilizadas) {
         this.pistasUtilizadas = pistasUtilizadas;
+    }
+
+    private String getNombrePalabraSinTildes(String nombrePalabra){
+        return nombrePalabra.replace("á", "a")
+                .replace("é", "e")
+                .replace("í", "i")
+                .replace("ó", "o")
+                .replace("ü", "u")
+                .replace("ú", "u")
+                .replace("ñ", "nn");
     }
 }

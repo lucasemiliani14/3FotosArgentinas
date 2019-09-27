@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager.widget.ViewPager;
@@ -19,7 +22,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import com.github.jinatonic.confetti.CommonConfetti;
 import com.tresfotos.tresfotosargentinas.model.pojo.Palabra;
 import com.tresfotos.tresfotosargentinas.R;
@@ -45,9 +48,11 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TextView textviewPlata;
     private TextView textviewNivel;
+    private TextView errorTextview;
     private User user;
     private Integer numeroPuntos;
     private String pistas;
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +61,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         appDatabase = AppDatabase.getInMemoryDatabase(this);
-        appDatabase.userDao().insertUser(new User("Taniferoide"));
+        appDatabase.userDao().insertUser(new User("Tanifero"));
         user = appDatabase.userDao().getUser();
+        username = appDatabase.userDao().getUser().getName();
         populateDatabaseWithArray();
         chequearSiElUsuarioYaGano();
 
@@ -79,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
         imageButtonHint = findViewById(R.id.imagebutton_clue);
         buttonSend = findViewById(R.id.button_send);
         textviewPlata = findViewById(R.id.textview_toolbar_plata); textviewPlata.setText(user.getPlata().toString());
+        errorTextview = findViewById(R.id.error_textview);
 
         viewPager = findViewById(R.id.imageview_center);
         viewpagerAdapter = new ViewpagerAdapter(this, palabraRandom);
@@ -105,7 +112,8 @@ public class MainActivity extends AppCompatActivity {
                     CommonConfetti.rainingConfetti(layout, new int[] { Color.BLUE }).oneShot();
                     popUpParaPasarAlSiguienteNivel();
                 } else {
-                    Toast.makeText(MainActivity.this, "Segui participando", Toast.LENGTH_LONG).show();
+                    setTextviewError();
+                    deleteErrorText();
                 }
             }
         });
@@ -361,9 +369,10 @@ public class MainActivity extends AppCompatActivity {
     private void popUpParaPasarAlSiguienteNivel(){
         ArrayList<String> frasesGanadoras = new ArrayList<>();
         Random rand = new Random();
-        frasesGanadoras.add("Atr perro!");frasesGanadoras.add("Segui asi crack!");frasesGanadoras.add("Bien fenómeno!");
-        frasesGanadoras.add("Sigamo asi!");frasesGanadoras.add("Que jugador!");frasesGanadoras.add("Buena máquina!");
-        frasesGanadoras.add("Fuaa que talento!");frasesGanadoras.add("Sos una fiera!");frasesGanadoras.add("De que planeta viniste?");
+        frasesGanadoras.add("Segui asi, " + username + "!");frasesGanadoras.add("Bueena " + username + "!");
+        frasesGanadoras.add("Que jugador!");frasesGanadoras.add("Buena máquina!");
+        frasesGanadoras.add("Fuaa que talento!");frasesGanadoras.add("De que planeta viniste?");
+        frasesGanadoras.add("Te admiro, " + username);frasesGanadoras.add("Atr perro!");
         Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_pasaste_de_nivel);
         TextView fraseGanadora = dialog.findViewById(R.id.frase_ganadora);
@@ -439,6 +448,28 @@ public class MainActivity extends AppCompatActivity {
         return totalLetters;
     }
 
+    // Saca el Textview de mensaje de error a los 3 segundos y medio
+    private void deleteErrorText(){
+        Timer t = new Timer(false);
+        t.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        errorTextview.setVisibility(View.INVISIBLE);
+                    }
+                });
+            }
+        }, 3500);
+    }
+
+    // Pone el Textview de mensaje de error
+    private void setTextviewError(){
+        errorTextview.setText("Dale " + username + ", vos podes!");
+        errorTextview.setVisibility(View.VISIBLE);
+    }
+
+
     // Llena la base de datos interna con todas las palabras. Esto deberia ser un Json en el futuro.
     private void populateDatabaseWithArray() {
 //        if (appDatabase.palabraDao().getAllPalabras(false).size() < 1) {
@@ -451,7 +482,7 @@ public class MainActivity extends AppCompatActivity {
             palabraList.add(new Palabra("skere"));palabraList.add(new Palabra("copa"));
             palabraList.add(new Palabra("mina"));palabraList.add(new Palabra("mole"));
             palabraList.add(new Palabra("dios"));palabraList.add(new Palabra("masa"));
-            palabraList.add(new Palabra("paton"));palabraList.add(new Palabra("chino"));
+            palabraList.add(new Palabra("patón"));palabraList.add(new Palabra("chino"));
             palabraList.add(new Palabra("piscis"));palabraList.add(new Palabra("gaucho"));
             palabraList.add(new Palabra("tanque"));palabraList.add(new Palabra("chueco"));
             palabraList.add(new Palabra("bocha"));palabraList.add(new Palabra("escabio"));
@@ -461,12 +492,12 @@ public class MainActivity extends AppCompatActivity {
             palabraList.add(new Palabra("piquete"));palabraList.add(new Palabra("vegano"));
             palabraList.add(new Palabra("corneta"));palabraList.add(new Palabra("cornudo"));
             palabraList.add(new Palabra("casamiento"));palabraList.add(new Palabra("emperador"));
-            palabraList.add(new Palabra("tucuman"));palabraList.add(new Palabra("sarmiento"));
-            palabraList.add(new Palabra("pinguino"));palabraList.add(new Palabra("mochila"));
-            palabraList.add(new Palabra("wachiturro"));palabraList.add(new Palabra("clasico"));
+            palabraList.add(new Palabra("tucumán"));palabraList.add(new Palabra("sarmiento"));
+            palabraList.add(new Palabra("pingüino"));palabraList.add(new Palabra("mochila"));
+            palabraList.add(new Palabra("wachiturro"));palabraList.add(new Palabra("clásico"));
             palabraList.add(new Palabra("taladro"));palabraList.add(new Palabra("karina"));
-            palabraList.add(new Palabra("reja"));palabraList.add(new Palabra("huracan"));
-            palabraList.add(new Palabra("varon"));palabraList.add(new Palabra("salta"));
+            palabraList.add(new Palabra("reja"));palabraList.add(new Palabra("huracán"));
+            palabraList.add(new Palabra("varón"));palabraList.add(new Palabra("salta"));
             palabraList.add(new Palabra("sapo"));palabraList.add(new Palabra("coco"));
             palabraList.add(new Palabra("toto"));palabraList.add(new Palabra("bananero"));
             palabraList.add(new Palabra("ogro"));palabraList.add(new Palabra("baranda"));
@@ -488,11 +519,12 @@ public class MainActivity extends AppCompatActivity {
             palabraList.add(new Palabra("grasa"));palabraList.add(new Palabra("pato"));
             palabraList.add(new Palabra("camionero"));palabraList.add(new Palabra("mezcla"));
             palabraList.add(new Palabra("calamar"));palabraList.add(new Palabra("mortero"));
-            palabraList.add(new Palabra("lugano"));palabraList.add(new Palabra("rocio"));
+            palabraList.add(new Palabra("lugano"));palabraList.add(new Palabra("rocío"));
             palabraList.add(new Palabra("oliva"));palabraList.add(new Palabra("tecla"));
-            palabraList.add(new Palabra("segundo"));palabraList.add(new Palabra("campeon"));
+            palabraList.add(new Palabra("segundo"));palabraList.add(new Palabra("campeón"));
             palabraList.add(new Palabra("doctor"));palabraList.add(new Palabra("lio"));
-            palabraList.add(new Palabra("facturas"));palabraList.add(new Palabra("vacio"));
+            palabraList.add(new Palabra("facturas"));palabraList.add(new Palabra("canosa"));
+            palabraList.add(new Palabra("vacío"));palabraList.add(new Palabra("caño"));
             for (Palabra palabra : palabraList) {
                 try {
                     appDatabase.palabraDao().insertPalabra(palabra);
