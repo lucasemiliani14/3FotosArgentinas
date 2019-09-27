@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "76164972547",
+    "firebase_url": "https://fafirebaseproject-40240.firebaseio.com",
+    "project_id": "fafirebaseproject-40240",
+    "storage_bucket": "fafirebaseproject-40240.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:76164972547:android:7c53ab72ababef58330e36",
+        "android_client_info": {
+          "package_name": "com.tresfotos.tresfotosargentinas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "76164972547-v4f477pj9g22fblahvh9dutdjjns966a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tresfotos.tresfotosargentinas",
+            "certificate_hash": "e452ee367a433c855a2bf44d204006b48486598b"
+          }
+        },
+        {
+          "client_id": "76164972547-9fblju3udtossshqi39fp7le51p89a9p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBm_8higTNKoSXaJALSpRzughXPoguexQA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "76164972547-9fblju3udtossshqi39fp7le51p89a9p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

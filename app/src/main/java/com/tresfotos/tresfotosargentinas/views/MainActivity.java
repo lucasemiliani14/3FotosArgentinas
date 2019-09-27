@@ -24,6 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.github.jinatonic.confetti.CommonConfetti;
+import com.google.firebase.database.FirebaseDatabase;
 import com.tresfotos.tresfotosargentinas.model.pojo.Palabra;
 import com.tresfotos.tresfotosargentinas.R;
 import com.tresfotos.tresfotosargentinas.model.pojo.User;
@@ -32,8 +33,8 @@ import com.tresfotos.tresfotosargentinas.database.AppDatabase;
 public class MainActivity extends AppCompatActivity {
 
     public static final Integer totalLettersToFill = 12;
+    private AppDatabase appDatabase;
     private Integer numeroDeMonedasASumar;
-    private String word;
     private ConstraintLayout layout;
     private LinearLayout linearLayoutWord;
     private LinearLayout linearLayoutLettersFirstLine;
@@ -41,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton imageButtonHint;
     private Button buttonSend;
     private ViewPager viewPager;
-    private AppDatabase appDatabase;
     private ViewpagerAdapter viewpagerAdapter;
     private Palabra palabraRandom;
     private List<Palabra> palabraList;
@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
     private Integer numeroPuntos;
     private String pistas;
     private String username;
+    private String word;
+    private FirebaseDatabase firebaseDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         setTheme(R.style.Theme_AppCompat_DayNight_NoActionBar);
         setContentView(R.layout.activity_main);
 
+        firebaseDatabase = FirebaseDatabase.getInstance();
         appDatabase = AppDatabase.getInMemoryDatabase(this);
         appDatabase.userDao().insertUser(new User("Tanifero"));
         user = appDatabase.userDao().getUser();
