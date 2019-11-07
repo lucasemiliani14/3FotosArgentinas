@@ -13,6 +13,7 @@ public class User {
     private String name;
     private Integer nivel;
     private Integer plata;
+    private String email;
 
     public User(String name) {
         this.name = name;
@@ -50,5 +51,13 @@ public class User {
 
     public void setPlata(Integer plata) {
         this.plata = plata;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

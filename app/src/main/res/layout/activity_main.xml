@@ -97,6 +97,7 @@
         app:layout_constraintBottom_toBottomOf="@id/escarapela_nivel"
         android:text="100"
         android:textStyle="bold"
+        android:textColor="#817777"
         android:src="@drawable/achuras1"
         android:textSize="17dp"
         android:id="@+id/textview_nivel"/>

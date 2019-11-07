@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.jinatonic.confetti.CommonConfetti;
 import com.google.firebase.database.FirebaseDatabase;
@@ -175,6 +176,7 @@ public class MainActivity extends AppCompatActivity {
             textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 26);
             textView.setTypeface(Typeface.DEFAULT_BOLD);
             textView.setGravity(Gravity.CENTER);
+            textView.setTextColor(Color.parseColor("#817777"));
 //            textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             textView.setId(i + 10);
             if (i < 6){ linearLayoutLettersFirstLine.addView(textView); } else { linearLayoutLettersSecondLine.addView(textView); }
@@ -451,6 +453,12 @@ public class MainActivity extends AppCompatActivity {
         return totalLetters;
     }
 
+    // Pone el Textview de mensaje de error
+    private void setTextviewError(){
+        errorTextview.setText("Dale " + username + ", vos podes!");
+        errorTextview.setVisibility(View.VISIBLE);
+    }
+
     // Saca el Textview de mensaje de error a los 3 segundos y medio
     private void deleteErrorText(){
         Timer t = new Timer(false);
@@ -466,10 +474,10 @@ public class MainActivity extends AppCompatActivity {
         }, 3500);
     }
 
-    // Pone el Textview de mensaje de error
-    private void setTextviewError(){
-        errorTextview.setText("Dale " + username + ", vos podes!");
-        errorTextview.setVisibility(View.VISIBLE);
+    // Te dice si un Email pasado por parametro es valido devolviendo un boleano
+    private boolean isEmailValid(String email) {
+        String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+        return email.matches(regex);
     }
 
 
